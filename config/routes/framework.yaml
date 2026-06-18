@@ -3,6 +3,6 @@ when@dev:
         resource: '@FrameworkBundle/Resources/config/routing/errors.php'
         prefix: /_error
 
-app_index:
-    path: /
-    controller: App\Controller\HelloController::index
+# app_index:
+#     path: /
+#     controller: App\Controller\HelloController::index
