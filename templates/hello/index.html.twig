@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1> Messages </h1>
+    <div>
+        {% if messages|length > 0 %}
+            {% for message in messages|slice(0, limit) %}     
+                <b>{{ message }} </b>
+            {% endfor %}
+        {% else %}
+            <div>
+                <p> Nothing here yet </p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
