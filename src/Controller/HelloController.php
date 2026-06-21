@@ -10,9 +10,9 @@ use Symfony\Component\Routing\Attribute\Route;
 class HelloController extends AbstractController
 {
     private $messages = [
-        "meep",
-        "moop",
-        "maap"
+        ['message' => "hello", 'created' => '2026/04/12'],
+        ['message' => "hallo", 'created' => '2026/05/12'],
+        ['message' => "hillo", 'created' => '2025/03/12'],
     ];
 
     #[Route('/{limit?}', name: 'app_index', requirements: ['limit' => '\d+'])]
