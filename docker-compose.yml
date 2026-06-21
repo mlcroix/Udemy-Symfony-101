@@ -37,10 +37,10 @@ services:
     container_name: symfony_mysql
     restart: unless-stopped
     environment:
-      MYSQL_DATABASE: symfony
+      MYSQL_DATABASE: symfony-101
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_PASSWORD: secret
-      MYSQL_USER: laravel
+      MYSQL_USER: symfony
     ports:
       - "3306:3306"
     volumes:
