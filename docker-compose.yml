@@ -7,8 +7,7 @@ services:
       dockerfile: Dockerfile
     container_name: symfony_app
     user: "1000:1000"
-    environment:
-      HOME: /tmp/home
+    env_file: ".env"
     restart: unless-stopped
     working_dir: /var/www/html
     volumes:
