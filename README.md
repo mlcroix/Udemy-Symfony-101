@@ -23,9 +23,23 @@ composer install
 **Create controller**
 ```
 docker exec symfony_app bin/console make:controller {{controller name}}
-
 ```
 
+**Create entity**
+Note: it's better to run this directly inside the container for the generation process.
+```
+docker exec symfony_app bin/console make:entity {{name}}
+```
+
+**Create new migration**
+```
+docker exec symfony_app bin/console make:migration
+```
+
+**Run Migration**
+```
+docker exec symfony_app bin/console doctrine:migrations:migrate
+```
 
 ## Xdebug
 In order to enable xdebug, install the xdebug plugin and add the following launch.json.
