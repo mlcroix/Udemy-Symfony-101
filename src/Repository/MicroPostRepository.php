@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\MicroPost;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Override;
 
 /**
  * @extends ServiceEntityRepository<MicroPost>
@@ -16,6 +17,15 @@ class MicroPostRepository extends ServiceEntityRepository
         parent::__construct($registry, MicroPost::class);
     }
 
+    public function findOneById(int $id): ?MicroPost
+    {
+        return $this->find($id);
+    }
+
+    public function getAll(): array
+    {
+        return $this->findAll();
+    }
 //    /**
 //     * @return MicroPost[] Returns an array of MicroPost objects
 //     */

@@ -41,6 +41,11 @@ docker exec symfony_app bin/console make:migration
 docker exec symfony_app bin/console doctrine:migrations:migrate
 ```
 
+**Run Fixtures**
+```
+docker exec symfony_app bin/console doctrine:fixtures:load 
+```
+
 ## Xdebug
 In order to enable xdebug, install the xdebug plugin and add the following launch.json.
 ```
