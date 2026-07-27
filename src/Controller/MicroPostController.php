@@ -40,6 +40,32 @@ final class MicroPostController extends AbstractController
         ]);
     }
 
+    #[Route('/micro-post/{post}/edit', name: "app_micro_post_edit")]
+    public function edit(MicroPost $post, Request $request): Response
+    {
+        $form = $this->createForm(MicroPostType::class, $post);
+
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            $post->setCreated(new DateTime());
+            
+            $this->entityManagerInterface->persist($post);
+            $this->entityManagerInterface->flush();
+            
+            $this->addFlash('success', 'Post edited successfully!');
+            
+            return $this->redirectToRoute('app_micro_post');
+        }
+
+        return $this->render('micro_post/add.html.twig',
+            [
+                'page_title' => "Edit post",
+                'form' => $form->createView()
+            ]
+        );
+    }
+
     #[Route('/micro-post/add', name: "app_micro_post_add")]
     public function add(Request $request): Response
     {
@@ -61,6 +87,7 @@ final class MicroPostController extends AbstractController
 
         return $this->render('micro_post/add.html.twig',
             [
+                'page_title' => "Create post",
                 'form' => $form->createView()
             ]
         );

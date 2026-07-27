@@ -22,10 +22,6 @@ class MicroPostType extends AbstractType
             ->add('text', TextareaType::class, [
                 'label' => 'Content',
                 'attr' => ['class' => 'form-control', 'rows' => 5]
-            ])
-            ->add('save', SubmitType::class, [
-                'label' => 'Save Post',
-                'attr' => ['class' => 'btn btn-primary mt-3']
             ]);
     }
 
