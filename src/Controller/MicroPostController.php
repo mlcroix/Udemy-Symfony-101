@@ -61,6 +61,7 @@ final class MicroPostController extends AbstractController
         return $this->render('micro_post/add.html.twig',
             [
                 'page_title' => "Edit post",
+                'bread' => " -> Edit Post",
                 'form' => $form->createView()
             ]
         );
@@ -88,6 +89,7 @@ final class MicroPostController extends AbstractController
         return $this->render('micro_post/add.html.twig',
             [
                 'page_title' => "Create post",
+                'bread' => " -> Add Post",
                 'form' => $form->createView()
             ]
         );
