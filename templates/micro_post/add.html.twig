@@ -17,6 +17,7 @@
                 'attr': {'class': 'block w-full shadow-sm border-gray-300 dark:border-transparent dark:text-gray-800 rounded-md border p-2 mt-1 mb-2'}
                 }) 
             }}
+            {{ form_errors(form.title) }}
 
             {{ form_label(form.text, null, {
                 'label_attr': {'class': 'block text-sm text-gray-700 dark:text-gray-300 font-medium'}
@@ -27,6 +28,7 @@
                 'attr': {'class': 'block w-full shadow-sm border-gray-300 dark:border-transparent dark:text-gray-800 rounded-md border p-2 mt-1 mb-2'}
                 }) 
             }}
+            {{ form_errors(form.text) }}
         </div>
 
         <div>

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\MicroPostRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MicroPostRepository::class)]
 class MicroPost
@@ -14,10 +15,24 @@ class MicroPost
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $title = null;
+    #[Assert\NotBlank(message: "Post title cannot be empty")]
+    #[Assert\Length(
+        min: 3,
+        max: 255,
+        minMessage: 'Title must be at least {{ limit }} characters',
+        maxMessage: 'Title cannot be longer than {{ limit }} characters'
+    )]
+    private string $title;
 
     #[ORM\Column(length: 500)]
-    private ?string $text = null;
+    #[Assert\NotBlank(message: "Post content cannot be empty")]
+    #[Assert\Length(
+        min: 10,
+        max: 500,
+        minMessage: 'Content must be at least {{ limit }} characters',
+        maxMessage: 'Content cannot be longer than {{ limit }} characters'
+    )]
+    private string $text;
 
     #[ORM\Column]
     private ?\DateTime $created = null;
