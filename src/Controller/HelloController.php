@@ -3,37 +3,61 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use App\Entity\UserProfile;
+use App\Entity\User;
+use App\Entity\Comment;
+use App\Entity\MicroPost;
+use App\Repository\UserProfileRepository;
+use App\Repository\CommentRepository;
+use App\Repository\MicroPostRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Doctrine\ORM\EntityManagerInterface;
 
 class HelloController extends AbstractController
 {
-    private $messages = [
-        ['message' => "hello", 'created' => '2026/04/12'],
-        ['message' => "hallo", 'created' => '2026/05/12'],
-        ['message' => "hillo", 'created' => '2025/03/12'],
-    ];
 
-    #[Route('/{limit?}', name: 'app_index', requirements: ['limit' => '\d+'])]
-    public function index(?int $limit = 3): Response
+    private EntityManagerInterface $entityManagerInterface; 
+
+    public function __construct(EntityManagerInterface $entityManager) {
+        $this->entityManagerInterface = $entityManager;
+    }
+
+    #[Route('/', name: 'app_index')]
+    public function index(MicroPostRepository $posts, CommentRepository $comments): Response
     {
+        $post = new MicroPost();
+        $post->setTitle("Welcome to Poland");
+        $post->setText("meep moop");
+        $post->setCreated(new \DateTime());
+
+        $comment1 = new Comment();
+        $comment1->setText("This is a comment");
+        $post->addComment($comment1);
+
+        $this->entityManagerInterface->persist($post);
+        $this->entityManagerInterface->flush();
+
         return $this->render(
             'hello/index.html.twig',
             [
-                'messages' => $this->messages,
-                'limit' => $limit
+                'messages' => [],
+                'limit' => 2
             ]
         );
-    }
-
-    #[Route('/message/{id}', name: "app_show_one", requirements: ['id' => '\d+'])]
-    public function showOne(int $id): Response {
-        return $this->render(
-            'hello/show_one.html.twig',
-            [
-                'message' => $this->messages[$id]
-            ]
-        );
+        // $user = new User();
+        // $user->setEmail("meepmoop@gmail.com");
+        // $user->setPassword("meepmoop");
+        // $profile = new UserProfile();
+        // $profile->setUser($user);
+        // $userProfileRepo->add($profile);
+        
+        // return $this->render(
+        //     'hello/index.html.twig',
+        //     [
+        //         'messages' => $this->messages,
+        //         'limit' => $limit
+        //     ]
+        // );
     }
 }
