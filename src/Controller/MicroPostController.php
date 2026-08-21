@@ -25,7 +25,7 @@ final class MicroPostController extends AbstractController
     #[Route('/micro-post', name: 'app_micro_post')]
     public function index(MicroPostRepository $repository): Response
     {
-        $microPosts = $repository->findAll();
+        $microPosts = $repository->findAllWithComments();
 
         // $microPost1 = new MicroPost();
         // $microPost1->setTitle("Welcome to Poland");
