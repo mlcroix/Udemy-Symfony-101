@@ -1,6 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block bread %} {{ bread }}  {% endblock %}
+{% block bread %} 
+    {% if page_title == "Edit post" %}
+        -> <a href="{{ path('app_micro_post_show', { post: post.id }) }}">{{ post.title }}</a>
+    {% else %}
+        -> <a href="{{ path('app_micro_post') }}">Posts</a>
+    {% endif %}
+    {{ bread }} 
+{% endblock %}
 
 {% block body %}
     <h1> {{ page_title }} </h1>

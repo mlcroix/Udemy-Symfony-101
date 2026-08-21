@@ -27,14 +27,6 @@ final class MicroPostController extends AbstractController
     {
         $microPosts = $repository->findAllWithComments();
 
-        // $microPost1 = new MicroPost();
-        // $microPost1->setTitle("Welcome to Poland");
-        // $microPost1->setText("meep moop");
-        // $microPost1->setCreated(new DateTime());
-
-        // $this->entityManagerInterface->persist($microPost1);
-        // $this->entityManagerInterface->flush();
-
         return $this->render('micro_post/index.html.twig', [
             'controller_name' => 'MicroPostController',
             'posts' => $microPosts
@@ -63,7 +55,8 @@ final class MicroPostController extends AbstractController
         return $this->render('micro_post/add.html.twig',
             [
                 'page_title' => "Edit post",
-                'bread' => " -> Edit Post",
+                'bread' => "-> Edit Post",
+                'post' => $post,
                 'form' => $form->createView()
             ]
         );

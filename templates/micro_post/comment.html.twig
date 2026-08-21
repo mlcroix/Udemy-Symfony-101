@@ -2,7 +2,7 @@
 
 {% block title %}{{ post.title }}{% endblock %}
 
-{% block bread %} -> Post {{ bread }} {% endblock %}
+{% block bread %} -> <a href="{{ path('app_micro_post_show', { post: post.id }) }}">{{ post.title }}</a> {{ bread }} {% endblock %}
 {% block body %}
     {{ include('micro_post/_post.html.twig', { post: post }) }}
 
