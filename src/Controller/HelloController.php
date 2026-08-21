@@ -26,17 +26,17 @@ class HelloController extends AbstractController
     #[Route('/', name: 'app_index')]
     public function index(MicroPostRepository $posts, CommentRepository $comments): Response
     {
-        $post = new MicroPost();
-        $post->setTitle("Welcome to Poland");
-        $post->setText("meep moop");
-        $post->setCreated(new \DateTime());
+        // $post = new MicroPost();
+        // $post->setTitle("Welcome to Poland");
+        // $post->setText("meep moop");
+        // $post->setCreated(new \DateTime());
 
-        $comment1 = new Comment();
-        $comment1->setText("This is a comment");
-        $post->addComment($comment1);
+        // $comment1 = new Comment();
+        // $comment1->setText("This is a comment");
+        // $post->addComment($comment1);
 
-        $this->entityManagerInterface->persist($post);
-        $this->entityManagerInterface->flush();
+        // $this->entityManagerInterface->persist($post);
+        // $this->entityManagerInterface->flush();
 
         return $this->render(
             'hello/index.html.twig',

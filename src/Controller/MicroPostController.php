@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\MicroPost;
+use App\Entity\Comment;
 use App\Repository\MicroPostRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -11,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Form\MicroPostType;
+use App\Form\CommentType;
 
 final class MicroPostController extends AbstractController
 {
@@ -90,6 +92,37 @@ final class MicroPostController extends AbstractController
             [
                 'page_title' => "Create post",
                 'bread' => " -> Add Post",
+                'form' => $form->createView()
+            ]
+        );
+    }
+
+    #[Route('/micro-post/{post}/comment', name: "app_micro_post_comment")]
+    public function comment(MicroPost $post, Request $request): Response
+    {
+        $form = $this->createForm(CommentType::class, new Comment());
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment = $form->getData();
+            $comment->setPost($post);
+            
+            $this->entityManagerInterface->persist($comment);
+            $this->entityManagerInterface->flush();
+            
+            $this->addFlash('success', 'Comment posted successfully!');
+            
+            return $this->redirectToRoute(
+                'app_micro_post_show',
+                ['post' => $post->getId()]
+            );
+        }
+
+        return $this->render('micro_post/comment.html.twig',
+            [
+                'page_title' => "Add comment",
+                'bread' => " -> Add comment",
+                'post' => $post,
                 'form' => $form->createView()
             ]
         );
