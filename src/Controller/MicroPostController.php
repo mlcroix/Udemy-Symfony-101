@@ -36,7 +36,7 @@ final class MicroPostController extends AbstractController
     }
 
     #[Route('/micro-post/{post}/edit', name: "app_micro_post_edit")]
-    #[IsGranted('ROLE_EDITOR')]
+    #[IsGranted(MicroPost::EDIT, subject: 'post')]
     public function edit(MicroPost $post, Request $request): Response
     {
         $form = $this->createForm(MicroPostType::class, $post);
@@ -126,6 +126,7 @@ final class MicroPostController extends AbstractController
     }
 
     #[Route('/micro-post/{post}', name: "app_micro_post_show")]
+    #[IsGranted('POST_VIEW', subject: 'post')]
     public function show(MicroPost $post): Response
     {
         return $this->render('micro_post/show.html.twig', [
