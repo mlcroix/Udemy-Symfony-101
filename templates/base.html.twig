@@ -33,7 +33,7 @@
                 {% endblock %}
             </div>
         </div>
-        {% if app.user %}
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <div class="text-right">
                 <div>
                     <a href="{{ path('app_logout') }}">
