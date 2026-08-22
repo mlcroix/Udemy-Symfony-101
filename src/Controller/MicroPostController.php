@@ -43,7 +43,6 @@ final class MicroPostController extends AbstractController
         
         if ($form->isSubmitted() && $form->isValid()) {
             $post->setCreated(new DateTime());
-            
             $this->entityManagerInterface->persist($post);
             $this->entityManagerInterface->flush();
             
@@ -72,7 +71,7 @@ final class MicroPostController extends AbstractController
         
         if ($form->isSubmitted() && $form->isValid()) {
             $microPost->setCreated(new DateTime());
-            
+            $microPost->setAuthor($this->getUser());
             $this->entityManagerInterface->persist($microPost);
             $this->entityManagerInterface->flush();
             
@@ -99,7 +98,7 @@ final class MicroPostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $comment = $form->getData();
             $comment->setPost($post);
-            
+            $comment->setAuthor($this->getUser());
             $this->entityManagerInterface->persist($comment);
             $this->entityManagerInterface->flush();
             
